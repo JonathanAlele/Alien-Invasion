@@ -1,5 +1,6 @@
 import pygame
 
+
 class Ship:
     """A class to manage the ship"""
 
@@ -9,26 +10,26 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
         self.settings = ai_game.settings
 
-        #Load the ship iamge and get its rect
-        self.image = pygame.image.load('images/DurrrSpaceShip.bmp')
+        # Load the ship iamge and get its rect
+        self.image = pygame.image.load("images/DurrrSpaceShip.bmp")
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
 
-        #movement flag
+        # movement flag
         self.moving_left = False
         self.moving_right = False
 
     def update(self):
         """Update the ship's position base don the movement flag"""
-        #Update the ship's x value not the rect
+        # Update the ship's x value not the rect
         if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
 
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
-        
-        #Update the rect object from self.x
+
+        # Update the rect object from self.x
         self.rect.x = self.x
 
     def blitme(self):

@@ -2,6 +2,8 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+
+
 class AlienInvasion:
     """Overall class to manage game assests and behaviour"""
 
@@ -10,7 +12,9 @@ class AlienInvasion:
         pygame.init()
         self.clock = pygame.time.Clock()
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -18,11 +22,11 @@ class AlienInvasion:
     def run_game(self):
         """Start the main loop for the game"""
         while True:
-            #watching for keyboard and mouse events
+            # watching for keyboard and mouse events
             self._check_events()
             self.ship.update()
             self._update_screen()
-            #make the most recently drawn screen visible
+            # make the most recently drawn screen visible
             self.clock.tick(60)
 
     def _check_events(self):
@@ -35,18 +39,18 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
-    def _check_keydown_events(self,event):
+    def _check_keydown_events(self, event):
         """Responds to keydown events"""
         if event.key == pygame.K_RIGHT:
-            #move the ship to the right
+            # move the ship to the right
             self.ship.moving_right = True
         if event.key == pygame.K_LEFT:
-            #move the ship to the left
+            # move the ship to the left
             self.ship.moving_left = True
         if event.key == pygame.K_q:
             sys.exit()
 
-    def _check_keyup_events(self,event):
+    def _check_keyup_events(self, event):
         """Responds to keyup events"""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
@@ -61,6 +65,6 @@ class AlienInvasion:
 
 
 if __name__ == "__main__":
-    #make a game instance and run the game
+    # make a game instance and run the game
     ai = AlienInvasion()
     ai.run_game()
