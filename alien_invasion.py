@@ -27,11 +27,7 @@ class AlienInvasion:
             # watching for keyboard and mouse events
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-            # get rid of bullets that have disappeared
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
+            self._update_bullets()
             self._update_screen()
             # make the most recently drawn screen visible
             self.clock.tick(60)
@@ -71,6 +67,14 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets"""
+        self.bullets.update()
+        # get rid of bullets that have disappeared
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Update images on teh screen and flip to the new screen"""
